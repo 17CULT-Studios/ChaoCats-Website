@@ -305,17 +305,17 @@
 
 
     <script>
-        const user="yourUsername";
-        const repo="yourRepo";
+        const user="17CULT-Studios";
+        const repo="Containment-Response";
 
         async function loadReleases() {
             const list = document.getElementById("release-list");
             try {
-                const res = await feltch('https://api.github.com/repos/${user}/${repo}/releases');
+                const res = await fetch(`https://api.github.com/repos/${user}/${repo}/releases`);
                 if (!res.ok) throw new Error("GitHub API error");
                 const releases = await res.json();
 
-                if(release.length === 0) {
+                if(releases.length === 0) {
                     list.innerHTML = "<li>No Releases Found Yet!</li>"
                     return;
                 }
