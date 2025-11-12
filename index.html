@@ -3,17 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>ChaoCats Home</title>
     <link rel="icon" type="image/png" href="Images/CHAOCATS_Logo.png">
     <style>
         html {
             scroll-behavior: smooth;
         }
+        *,
+        *::before,
+        *::after {
+            transition: background-color 0.3s ease,color 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+        }
         body{
             font-family: Arial,sans-serif;
             margin: 0;
             text-align: center;
-            background-color: rgb(190, 30, 30);
+            background-color: rgb(200, 0, 0);
+            color: #222222;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ddd;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            padding: 10px 15px;
+            background-color: #eee;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode #theme-toggle {
+            background-color: #333;
+            color: #fff;
+        }
+
+        img {
+            background-color: transparent;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode img {
+            background-color: #121212;
         }
 
         h1 {
@@ -22,10 +66,18 @@
             color:rgb(28, 76, 117);
         }
 
+        body.dark-mode h1 {
+            color: #ddd;
+        }
+
         p {
             font-size: 1.2em;
-            color:rgb(255, 255, 255);
+            color:rgb(0, 0, 0);
             margin-bottom: 30px;
+        }
+
+        body.dark-mode p {
+            color: #ddd;
         }
 
         .tab-bar {
@@ -61,6 +113,10 @@
             box-sizing: border-box;
         }
 
+        body.dark-mode section {
+            color: #000;
+        }
+
         section:not(:last-child) {
             margin-bottom: 10px;
         }
@@ -79,7 +135,11 @@
             flex-wrap: wrap;
             gap: 40px;
             padding: 50px;
-            background-color: #111;
+            background-color: rgb(200, 0, 0);
+        }
+
+        body.dark-mode .card-container {
+            background-color: rgb(100, 0, 0);
         }
 
         .card {
@@ -116,7 +176,7 @@
             width: 100%;
             height: 100%;
             background-color: white;
-            color: black;
+            color: rgb(0, 0, 0);
             padding: 20px;
             box-sizing: border-box;
             transform: translateX(100%);
@@ -127,13 +187,26 @@
             align-items: flex-start;
         }
 
+        body.dark-mode .info {
+            background-color: #1e1e1e;
+            color: #ddd;
+        }
+
         .info h3 {
             margin: 0 0 10px;
+        }
+
+        body.dark-mode .info h3 {
+            color: #ddd;
         }
 
         .info p {
             margin-bottom: 15px;
             color: #555;
+        }
+
+        body.dark-mode .info p {
+            color: #ddd;
         }
 
         .info a {
@@ -142,6 +215,10 @@
             font-weight: bold;
             border-bottom: 2px solid transparent;
             transition: border-color 0.3s;
+        }
+
+        body.dark-mode .info a {
+            color: #ddd;
         }
 
         .info a:hover {
@@ -156,10 +233,31 @@
             transform: translateX(0);
         }
 
-        #info {background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);}
-        #contact {background-color: rgb(255, 0, 0); color: white;}
-        #meettheteam {background-color: rgb(0, 0, 0); color: white;}
-        #games {background-color: rgb(255, 0, 0); color: white;}
+       
+
+        #info, #contact, #meettheteam, #games {
+            background-color: red;
+        }
+
+        body.dark-mode #info {
+            background-color: rgb(200, 0, 0);
+            color: #ddd;
+        }
+
+        body.dark-mode #contact {
+            background-color: rgb(200, 0, 0);
+            color: #ddd;
+        }
+
+        body.dark-mode #meettheteam {
+            background-color: rgb(200, 0, 0);
+            color: #ddd;
+        }
+
+        body.dark-mode #games {
+            background-color: rgb(200, 0, 0);
+            color: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -173,6 +271,7 @@
     <img src="Images/CHAOCATS_Logo.png" alt="Website Banner" class="banner">
     <h1>We are the CHAO Cats</h1>
     <p>"Quality, Veriety, Chaos"</p>
+    <button id="theme-toggle">Dark Mode</button>
 
   <section id="info">
     <h2>Our Mission Statement</h2>
@@ -323,7 +422,31 @@
 
   <section id="contact">
     <h2>Contact Section</h2>
-    <p>Here’s how you can reach me!</p>
+        <p>Here’s how you can reach me!</p>
+        <p>Email:thechaocats@gmail.com</p>
+        <p>Follow us on social media:</p>
+        <p><a href="https://www.facebook.com/profile.php?id=61583647350468" target="_blank"><i class="fab fa-facebook" style="font-size: 40px;">Facebook</i></a></p>
+        <p><a href="https://x.com/TheChaoCats" target="_blank"><i class="fab fa-twitter" style="font-size: 40px;">Twitter</i></a></p>
+        <p><a href="https://www.instagram.com/thechaocats/" target="_blank"><i class="fab fa-instagram" style="font-size: 40px;">Instagram</i></a></p>
   </section>
+
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    if(localStorage.getItem("theme")==='dark') {
+        body.classList.add('dark-mode');
+        toggleButton.textContent='Light Mode';
+    }
+
+    toggleButton.addEventListener('click',() => {
+        body.classList.toggle('dark-mode');
+
+        const isDark = body.classList.contains('dark-mode');
+        toggleButton.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+
+        localStorage.setItem('theme',isDark ? 'dark' : 'light');
+    })
+  </script>
 </body>
 </html>
