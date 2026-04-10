@@ -432,7 +432,7 @@
             };
 
             try {
-                await fetch(webhookurl, {
+                await fetch(webhook, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
@@ -460,20 +460,22 @@
                     const asset = rel.assets[0]
                     const releaseTitle = rel.name || rel.tag_name;
 
+                    const buttonId = `dl-${rel.id}`
+
                     li.innerHTML = `
                         <div class="release">
                             <div class="release-info">
                                 <h3>${releaseTitle}</h3>
                                  <p>Released on ${date}</p>
                              </div>
-                            ${asset ? `<a href="${asset.browser_download_url}" class="download-btn">Download</a>` 
+                            ${asset ? `<a href="${asset.browser_download_url}" id="${buttonId}" class="download-btn">Download</a>` 
                                     : `<span class="no-download">No file</span>`}
                         </div>
                     `;
                     list.appendChild(li);
 
                     if(asset) {
-                        const btn = document.getElementById('dl-${rel.id}');
+                        const btn = document.getElementById(buttonId);
                         btn.addEventListener('click',() => {
                             sendDownloadNotif(releaseTitle);
                         })
