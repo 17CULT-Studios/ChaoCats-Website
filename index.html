@@ -527,5 +527,33 @@
     })
 
   </script>
+
+  <script>
+    const webhookurl = "https://discord.com/api/webhooks/1492005339560673380/p31bIPMHQ9pW2VA0SuoTydm3lqiG3Q4pxowfbMuPZdU54ri_p-ofSR1bsDJX71CeoeJc"
+    const sendDiscordNotifacation = async () => {
+        const data = {
+            username: "ChaoCats Informer",
+            content: "Site Loaded",
+            embeds: [{
+                title: "Visit Details",
+                color: 5814783,
+                fields:[
+                    { name: "Page", value: window.location.href, inline: true},
+                    { name: "Time", value: new Date().toLocaleString(), inline: true}
+                ]
+            }]
+        };
+        try {
+            await fetch(webhookurl,{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+        } catch(error) {
+
+        }
+    };
+  </script>
+  sendDiscordNotifacation();
 </body>
 </html>
