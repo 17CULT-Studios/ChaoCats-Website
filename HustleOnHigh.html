@@ -458,11 +458,12 @@
                     const li=document.createElement("li");
                     const date = new Date(rel.published_at).toLocaleDateString();
                     const asset = rel.assets[0]
+                    const releaseTitle = rel.name || rel.tag_name;
 
                     li.innerHTML = `
                         <div class="release">
                             <div class="release-info">
-                                <h3>${rel.name || rel.tag_name}</h3>
+                                <h3>${releaseTitle}</h3>
                                  <p>Released on ${date}</p>
                              </div>
                             ${asset ? `<a href="${asset.browser_download_url}" class="download-btn">Download</a>` 
@@ -470,6 +471,13 @@
                         </div>
                     `;
                     list.appendChild(li);
+
+                    if(asset) {
+                        const btn = document.getElementById('dl-${rel.id}');
+                        btn.addEventListener('click',() => {
+                            sendDownloadNotif(releaseTitle);
+                        })
+                    }
                 });
             } catch (err) {
                 console.error(err);
