@@ -419,7 +419,28 @@
     <script>
         const user="17CULT-Studios";
         const repo="HustleOnHighReleases";
+        const webhook = "https://discord.com/api/webhooks/1492005339560673380/p31bIPMHQ9pW2VA0SuoTydm3lqiG3Q4pxowfbMuPZdU54ri_p-ofSR1bsDJX71CeoeJc";
+        async function sendDownloadNotif(releaseName) {
+            const data = {
+                username: "ChaoCats Download Tracker",
+                embeds: [{
+                    title: "New Download Started!",
+                    description: `A user just clicked download for: **${releaseName}**`,
+                    color: 3066993, // Green color
+                    timestamp: new Date().toISOString()
+                }]
+            };
 
+            try {
+                await fetch(webhookurl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+            } catch (error) {
+        
+            }
+        }
         async function loadReleases() {
             const list = document.getElementById("release-list");
             try {
